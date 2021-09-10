@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import { CreateSuperhero, SuperheroesList } from './components';
+import { CreateSuperhero, Superhero, SuperheroesList } from './components';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
 
         <Switch>
           <Route path={'/create'}> <CreateSuperhero /> </Route>
+          <Route path={'/:id'} > <Superhero /> </Route>
           <Route path={'/'}> <SuperheroesList /> </Route>
         </Switch>
       </Router>

@@ -13,9 +13,17 @@ module.exports = {
     }
   },
 
-  getOneSuperhero: (req, res, next) => {
+  getOneSuperhero: async (req, res, next) => {
     try {
-      
+      const Superhero = db.getModel('Superhero');
+
+      const oneSuperhero = await Superhero.findOne({
+        where: {
+          id: req.query.id
+        }
+      });
+
+      res.json(oneSuperhero);
     } catch (e) {
       next(e);
     }
