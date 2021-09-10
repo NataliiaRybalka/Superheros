@@ -15,7 +15,7 @@ module.exports = (client) => {
       real_name: {
         type: DataTypes.STRING,
       },
-      origin_description​: {
+      origin_description: {
         type: DataTypes.STRING
       },
       superpowers: {

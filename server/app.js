@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const { envConstants: { HOST, PORT } } = require('./constants');
 const connection = require('./database');
-const { superherosRouter } = require('./routes');
+const { createSuperheroRouter, superheroesRouter } = require('./routes');
 
 connection.getInstance().setModels();
 
@@ -14,7 +14,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', superherosRouter);
+app.use('/', superheroesRouter);
+// app.use('/create', createSuperheroRouter);
 
 app.listen(PORT, HOST, () => {
   console.log(`App listen ${PORT}`);

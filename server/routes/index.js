@@ -1,3 +1,4 @@
 module.exports = {
-  superherosRouter: require('./superheros.router')
+  createSuperheroRouter: require('./createSuperhero.router'),
+  superheroesRouter: require('./superheroes.router')
 };

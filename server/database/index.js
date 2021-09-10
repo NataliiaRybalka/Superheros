@@ -9,7 +9,7 @@ module.exports = (() => {
 
   const initConnection = () => {
     const client = new Sequelize(MySQL_DB, MySQL_USER, MySQL_USER_PASSWORD, { dialect: 'mysql' });
-    console.log(client);
+
     const models = {};
     const modelsDir = path.join(process.cwd(), 'database', 'models');
 
