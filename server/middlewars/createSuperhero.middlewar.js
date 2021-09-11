@@ -4,7 +4,7 @@ const { createSuperheroValidator: { createSuperhero } } = require('../validators
 module.exports = {
   checkSuperheroData: (req, res, next) => {
     try {
-      const { error } = createSuperhero.validate(req.body.superheroesData);
+      const { error } = createSuperhero.validate(req.body);
 
       if (error) {
         throw new Error('All fields is required');

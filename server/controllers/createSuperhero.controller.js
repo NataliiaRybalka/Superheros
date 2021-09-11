@@ -12,13 +12,13 @@ module.exports = {
     try {
       const Superhero = db.getModel('Superhero');
 
-      const { photos, body: {superheroesData : {
+      const { photos, body: {
         nickname,
         real_name,
         origin_description,
         superpowers,
         catch_phrase,
-      }} } = req;
+      } } = req;
 
       const newSuperhero = await Superhero.create({
         nickname,
@@ -35,7 +35,7 @@ module.exports = {
 
         for (const photo of photos) {
           const { finalPath, photoPath } = await createPhotoPath(photo.name, id);
-          allPhotosPath.push(photoPath);
+          allPhotosPathArray.push(photoPath);
           await photo.mv(finalPath);
         }
 

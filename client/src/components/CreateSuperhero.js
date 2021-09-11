@@ -33,6 +33,11 @@ export default function CreateSuperhero() {
       formData.append(image.name, image);
     });
 
+    Object.entries(state).map(([key, value]) => {
+      console.log('key = ', key, '; val = ', value);
+      formData.append(key, value);
+    });
+
     await axios.post('http://localhost:5000/create', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
