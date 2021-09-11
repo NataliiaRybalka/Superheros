@@ -6,6 +6,6 @@ module.exports = {
     real_name: Joi.string().required(),
     origin_description: Joi.string().required(),
     superpowers: Joi.string().required(),
-    catch_phrase: Joi.string().required(),
+    catch_phrase: Joi.string().required()
   })
 };

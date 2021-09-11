@@ -4,7 +4,7 @@ const { createSuperheroController: { createSuperhero } } = require('../controlle
 const { createSuperheroMiddlewar: { checkSuperheroData, checkSuperheroFiles } } = require('../middlewars');
 
 router.post('/', 
-  checkSuperheroData,
+  // checkSuperheroData,
   checkSuperheroFiles,
   createSuperhero
 );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import { httpRequest } from '../helpers/http.helper';
 
@@ -12,17 +13,31 @@ export default function CreateSuperhero() {
     superpowers: '',
     catch_phrase: ''
   });
+  const [images, setImages] = useState([]);
 
   const changeInput = (e) => {
     const {target: { name, value }} = e;
     setState({
       ...state,
       [name]: value
-    })
+    });
+  };
+
+  const changeFileInput = async (e) => {
+    setImages([...e.target.files]);
   };
 
   const addNewHero = async () => {
-    const data = await request('http://localhost:5000/create', 'POST', {superheroesData: state});
+    const formData = new FormData();
+    images.forEach(image => {
+      formData.append(image.name, image);
+    });
+
+    await axios.post('http://localhost:5000/create', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
 
     setState({
       nickname: '',
@@ -49,6 +64,9 @@ export default function CreateSuperhero() {
       <br />
       <label>catch_phrase</label>
       <input value={state.catch_phrase} onChange={changeInput} type={'text'} name={'catch_phrase'} />
+      <br />
+      <label>images</label>
+      <input multiple={true} onChange={changeFileInput} type={'file'} name={'image'} />
       <br />
       <button onClick={addNewHero}>add new hero</button>
     </div>

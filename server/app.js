@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(process.cwd(), 'static')));
 
-app.use(fileupload());
+app.use(fileupload({}));
 
 app.use('/', superheroesRouter);
 app.use('/create', createSuperheroRouter);
