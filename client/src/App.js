@@ -14,7 +14,7 @@ function App() {
 
         <Switch>
           <Route path={'/create'}> <CreateSuperhero /> </Route>
-          <Route path={'/:id'} > <Superhero /> </Route>
+          <Route path={'/superhero/:id'} > <Superhero /> </Route>
           <Route path={'/'}> <SuperheroesList /> </Route>
         </Switch>
       </Router>

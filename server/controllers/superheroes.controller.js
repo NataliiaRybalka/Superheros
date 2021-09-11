@@ -19,7 +19,7 @@ module.exports = {
 
       const oneSuperhero = await Superhero.findOne({
         where: {
-          id: req.query.id
+          id: req.params.id
         }
       });
 

@@ -21,8 +21,8 @@ export default function SuperheroesList() {
     <div>
       <h1>Superheroes</h1>
 
-      {!!allSuperheroes && allSuperheroes.map(superhero => (
-        <Link to={`/${superhero.id}`} key={superhero.id}>
+      {allSuperheroes && allSuperheroes.map(superhero => (
+        <Link to={`/superhero/${superhero.id}`} key={superhero.id}>
           <div>
             <h3>{superhero.nickname}</h3>
           </div>
