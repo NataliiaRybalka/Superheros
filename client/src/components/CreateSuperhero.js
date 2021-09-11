@@ -21,8 +21,8 @@ export default function CreateSuperhero() {
     })
   };
 
-  const addNewHero = () => {
-    console.log(state);
+  const addNewHero = async () => {
+    const data = await request('http://localhost:5000/create', 'POST', {superheroesData: state});
 
     setState({
       nickname: '',

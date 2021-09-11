@@ -1,3 +1,3 @@
 module.exports = {
-  fileMiddlewar: require('./file.moddlewar')
+  createSuperheroMiddlewar: require('./createSuperhero.middlewar')
 };

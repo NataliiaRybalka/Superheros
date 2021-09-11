@@ -12,15 +12,13 @@ module.exports = {
     try {
       const Superhero = db.getModel('Superhero');
 
-      const { photos, body: {
+      const { photos, body: {superheroesData : {
         nickname,
         real_name,
         origin_description,
         superpowers,
         catch_phrase,
-      } } = req;
-
-      const [avatar] = photos;
+      }} } = req;
 
       const newSuperhero = await Superhero.create({
         nickname,
@@ -32,21 +30,8 @@ module.exports = {
 
       const { id } = newSuperhero;
 
-      if (avatar) {
-        const { finalPath, photoPath } = await createPhotoPath(avatar.name, id);
-        await avatar.mv(finalPath);
-
-        await Superhero.update({
-          avatar: photoPath
-        }, {
-          where: {
-            id
-          }
-        });
-      };
-
       if (photos) {
-        const allPhotosPath = [];
+        const allPhotosPathArray = [];
 
         for (const photo of photos) {
           const { finalPath, photoPath } = await createPhotoPath(photo.name, id);
@@ -55,7 +40,8 @@ module.exports = {
         }
 
         await Superhero.update({
-          images: allPhotosPath
+          avatar: allPhotosPathArray[0],
+          images: allPhotosPathArray
         }, {
           where: {
             id

@@ -1,8 +1,12 @@
 const router = require('express').Router();
 
-const { createSuperheroController } = require('../controllers');
-const { fileMiddlewar } = require('../middlewars');
+const { createSuperheroController: { createSuperhero } } = require('../controllers');
+const { createSuperheroMiddlewar: { checkSuperheroData, checkSuperheroFiles } } = require('../middlewars');
 
-router.post('/', fileMiddlewar.checkFiles, createSuperheroController.createSuperhero);
+router.post('/', 
+  checkSuperheroData,
+  checkSuperheroFiles,
+  createSuperhero
+);
 
 module.exports = router;
