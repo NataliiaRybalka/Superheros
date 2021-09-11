@@ -24,12 +24,15 @@ module.exports = (client) => {
       catch_phrase: {
         type: DataTypes.STRING
       },
+      avatar: {
+        type: DataTypes.STRING
+      },
       images: {
         type: DataTypes.JSON
       }
     },
     {
-      tableName: 'superheroes-list',
+      tableName: 'superheroes_list',
       timestamps: false
     }
   );

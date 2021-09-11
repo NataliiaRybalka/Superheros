@@ -8,6 +8,7 @@
     "express-fileupload": "1.2.1",
     "mysql2": "2.3.0",
     "sequelize": "6.6.5",
-    "sequelize-cli": "6.2.0"
+    "sequelize-cli": "6.2.0",
+    "uuid": "8.3.2"
   }
 }
