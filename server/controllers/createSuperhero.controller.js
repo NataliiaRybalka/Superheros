@@ -1,3 +1,4 @@
+const { responseCodes } = require('../constants');
 const db = require('../database').getInstance();
 const { createPhotoPathHelper: { createPhotoPath } } = require('../helpers');
 
@@ -51,7 +52,7 @@ module.exports = {
         }
       });
 
-      res.json(superhero);
+      res.status(responseCodes.CREATED).json(superhero);
     } catch (e) {
       next(e);
     }

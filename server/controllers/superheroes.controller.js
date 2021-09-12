@@ -1,3 +1,4 @@
+const { responseCodes } = require('../constants');
 const db = require('../database').getInstance();
 const { createPhotoPathHelper: { createPhotoPath } } = require('../helpers');
 
@@ -49,7 +50,7 @@ module.exports = {
         }
       });
 
-      res.json('DELETED');
+      res.status(responseCodes.NO_CONTENT).json('DELETED');
     } catch (e) {
       next(e);
     }
@@ -126,7 +127,7 @@ module.exports = {
         }
       });
 
-      res.json(updatedSuperhero);
+      res.status(responseCodes.CREATED).json(updatedSuperhero);
     } catch (e) {
       next(e);
     }
