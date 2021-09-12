@@ -65,7 +65,8 @@ module.exports = {
           origin_description,
           superpowers,
           catch_phrase,
-          avatar
+          avatar,
+          deleteImages
         },
         params: {
           id
@@ -82,6 +83,7 @@ module.exports = {
       });
 
       const allPhotosPathArray = [...superhero.images];
+
       if (photos) {
         for (const photo of photos) {
           const { finalPath, photoPath } = await createPhotoPath(photo.name, id);
@@ -98,13 +100,20 @@ module.exports = {
         });
       }
 
+      let arrayWithoutDeletedImages;
+      if (deleteImages) {
+        const arrayDeleteImages = deleteImages.split(',');
+        arrayWithoutDeletedImages = allPhotosPathArray.filter(onePath => !arrayDeleteImages.includes(onePath));
+      }
+
       await Superhero.update({
         nickname,
         real_name,
         origin_description,
         superpowers,
         catch_phrase,
-        avatar
+        avatar,
+        images: arrayWithoutDeletedImages
       }, {
         where: {
           id

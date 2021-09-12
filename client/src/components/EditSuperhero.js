@@ -11,6 +11,12 @@ export default function EditSuperhero(props) {
       ...state,
       [name]: value
     });
+    if (name === 'deleteImages') {
+      setState({
+        ...state,
+        deleteImages: [...state.deleteImages, value]
+      });
+    }
   };
 
   const changeFileInput = (e) => {
@@ -73,6 +79,17 @@ export default function EditSuperhero(props) {
         key={image}
         onClick={() => selectAvatar(image)}
       />)}
+      <br />
+      <label>delete image</label>
+      <br />
+      {superhero.images.map(image => (
+        <span key={image}>
+          <input value={image} type={'checkbox'} name={'deleteImages'} onChange={changeInput} /> <label>
+            <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} />
+          </label>
+          <br />
+        </span>
+      ))}
       <br />
       <button onClick={updateHero}>update superhero</button>
     </div>

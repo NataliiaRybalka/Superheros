@@ -17,7 +17,8 @@ export default function Superhero() {
     origin_description: '',
     superpowers: '',
     catch_phrase: '',
-    avatar: null
+    avatar: null,
+    deleteImages: []
   });
 
   const {id} = useParams();
@@ -38,7 +39,8 @@ export default function Superhero() {
       real_name: superhero && superhero.real_name,
       origin_description: superhero && superhero.origin_description,
       superpowers: superhero && superhero.superpowers,
-      catch_phrase: superhero && superhero.catch_phrase
+      catch_phrase: superhero && superhero.catch_phrase,
+      deleteImages: []
     });
   }
 
