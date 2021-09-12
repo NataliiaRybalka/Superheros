@@ -1,24 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-const uuid = require('uuid').v1;
-const { promisify } = require('util');
-
 const db = require('../database').getInstance();
-
-const mkdirPromise = promisify(fs.mkdir);
+const { createPhotoPathHelper: { createPhotoPath } } = require('../helpers');
 
 module.exports = {
   createSuperhero: async (req, res, next) => {
     try {
       const Superhero = db.getModel('Superhero');
 
-      const { photos, body: {
-        nickname,
-        real_name,
-        origin_description,
-        superpowers,
-        catch_phrase,
-      } } = req;
+      const { body: {
+          nickname,
+          real_name,
+          origin_description,
+          superpowers,
+          catch_phrase,
+        },
+        photos,
+      } = req;
 
       const newSuperhero = await Superhero.create({
         nickname,
@@ -59,21 +55,5 @@ module.exports = {
     } catch (e) {
       next(e);
     }
-  }
-};
-
-const createPhotoPath = async (filename, id) => {
-  const pathWithoutStatic = path.join('superheroes', id.toString());
-  const uploadPath = path.join(process.cwd(), 'static', pathWithoutStatic);
-  const fileExtension = filename.split('.').pop();
-  const photoName = `${uuid()}.${fileExtension}`;
-  const finalPath = path.join(uploadPath, photoName);
-  const photoPath = path.join(pathWithoutStatic, photoName);
-
-  await mkdirPromise(uploadPath, { recursive: true });
-
-  return {
-    finalPath,
-    photoPath
   }
 };

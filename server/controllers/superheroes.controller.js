@@ -1,4 +1,5 @@
 const db = require('../database').getInstance();
+const { createPhotoPathHelper: { createPhotoPath } } = require('../helpers');
 
 module.exports = {
   getAllSuperheroes: async (req, res, next) => {
@@ -49,6 +50,66 @@ module.exports = {
       });
 
       res.json('DELETED');
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  updateSuperhero: async (req, res, next) => {
+    try {
+      const Superhero = db.getModel('Superhero');
+
+      const { body: {
+          nickname,
+          real_name,
+          origin_description,
+          superpowers,
+          catch_phrase,
+          avatar
+        },
+        params: {
+          id
+        },
+        photos,
+      } = req;
+
+      const allPhotosPathArray = [];
+      if (photos) {
+        for (const photo of photos) {
+          const { finalPath, photoPath } = await createPhotoPath(photo.name, id);
+          allPhotosPathArray.push(photoPath);
+          await photo.mv(finalPath);
+        }
+
+        await Superhero.update({
+          images: allPhotosPathArray
+        }, {
+          where: {
+            id
+          }
+        });
+      }
+
+      await Superhero.update({
+        nickname,
+        real_name,
+        origin_description,
+        superpowers,
+        catch_phrase,
+        avatar
+      }, {
+        where: {
+          id
+        }
+      });
+
+      const updatedSuperhero = await Superhero.findOne({
+        where: {
+          id
+        }
+      });
+
+      res.json(updatedSuperhero);
     } catch (e) {
       next(e);
     }

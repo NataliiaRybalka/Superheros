@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 
 import { httpRequest } from '../helpers/http.helper';
+import { EditSuperhero } from '.';
 
 export default function Superhero() {
   const { request } = httpRequest();
@@ -9,6 +10,15 @@ export default function Superhero() {
   const [superhero, setSuperhero] = useState();
   const [superpowers, setSuperpowers] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [startEdit, setStartEdit] = useState(false);
+  const [state, setState] = useState({
+    nickname: '',
+    real_name: '',
+    origin_description: '',
+    superpowers: '',
+    catch_phrase: '',
+    avatar: null
+  });
 
   const {id} = useParams();
 
@@ -22,15 +32,24 @@ export default function Superhero() {
     setSuperpowers(superhero && superhero.superpowers.split(','));
   };
 
+  const fillInputsValues = () => {
+    setState({
+      nickname: superhero &&superhero.nickname,
+      real_name: superhero && superhero.real_name,
+      origin_description: superhero && superhero.origin_description,
+      superpowers: superhero && superhero.superpowers,
+      catch_phrase: superhero && superhero.catch_phrase
+    });
+  }
+
   useEffect(() => {
     getOneSuperhero();
   }, [id]);
 
   useEffect(() => {
-    getArraySuperpowers()
+    getArraySuperpowers();
+    fillInputsValues();
   }, [superhero]);
-
-  const editSuperhero = () => {};
 
   const deleteSuperhero = async () => {
     const data = await request(`http://localhost:5000/${id}`, 'DELETE');
@@ -39,8 +58,14 @@ export default function Superhero() {
     }
   };
 
+  const editSuperhero = () => {
+    setStartEdit(!startEdit);
+  };
+
   return (
     <div>
+      {startEdit && <EditSuperhero state={state} setState={setState} setStartEdit={setStartEdit} superhero={superhero} setSuperhero={setSuperhero} />}
+
       {superhero && (
         <div>
           <div>

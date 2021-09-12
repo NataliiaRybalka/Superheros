@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function CreateSuperhero() {
-  const [state, setState] = useState({
-    nickname: '',
-    real_name: '',
-    origin_description: '',
-    superpowers: '',
-    catch_phrase: ''
-  });
+export default function EditSuperhero(props) {
+  const { state, setState, setStartEdit, superhero, setSuperhero } = props;
   const [images, setImages] = useState([]);
-  const [newSuperhero, setNewSuperhero] = useState();
 
   const changeInput = (e) => {
     const {target: { name, value }} = e;
@@ -25,34 +17,34 @@ export default function CreateSuperhero() {
     setImages([...e.target.files]);
   };
 
-  const addNewHero = async () => {
+  const selectAvatar = (image) => {
+    setState({...state, avatar: image});
+  };
+
+  const updateHero = async () => {
     const formData = new FormData();
-    images.forEach(image => {
-      formData.append(image.name, image);
-    });
+    images.map(image => formData.append(image.name, image));
 
     Object.entries(state).map(([key, value]) => formData.append(key, value));
 
-    const res = await axios.post('http://localhost:5000/create', formData, {
+    const {data} = await axios.put(`http://localhost:5000/${superhero.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
 
-    setNewSuperhero(res.data);
+    setSuperhero(data);
 
     setState({
-      nickname: '',
-      real_name: '',
-      origin_description: '',
-      superpowers: '',
-      catch_phrase: ''
+      nickname: superhero.nickname,
+      real_name: superhero.real_name,
+      origin_description: superhero.origin_description,
+      superpowers: superhero.superpowers,
+      catch_phrase: superhero.catch_phrase
     });
-  };
 
-  useEffect(() => {
-    return () => false;
-  }, []);
+    setStartEdit(false);
+  };
 
   return (
     <div>
@@ -74,9 +66,15 @@ export default function CreateSuperhero() {
       <label>images</label>
       <input multiple={true} onChange={changeFileInput} type={'file'} name={'image'} />
       <br />
-      <button onClick={addNewHero}>add new superhero</button>
-
-      { newSuperhero && <Redirect to={`/superhero/${newSuperhero.id}`} /> }
+      <label>avatar</label>
+      {superhero.images.map(image => <img
+        src={`http://localhost:5000/${image}`}
+        alt={superhero.nickname}
+        key={image}
+        onClick={() => selectAvatar(image)}
+      />)}
+      <br />
+      <button onClick={updateHero}>update superhero</button>
     </div>
   )
-};
+}
