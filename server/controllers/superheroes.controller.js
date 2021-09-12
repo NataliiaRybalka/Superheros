@@ -5,9 +5,18 @@ module.exports = {
     try {
       const Superhero = db.getModel('Superhero');
 
-      const allSuperheroes = await Superhero.findAll();
+      const limit = 5;
+      const offset = limit * (req.query.page - 1);
 
-      res.json(allSuperheroes);
+      const allSuperheroes = await Superhero.findAll();
+      const totalPages = Math.ceil(allSuperheroes.length / limit);
+
+      const superheroesForOnePage = await Superhero.findAll({
+        limit,
+        offset 
+      });
+
+      res.json({ superheroesForOnePage, totalPages });
     } catch (e) {
       next(e);
     }
