@@ -25,6 +25,7 @@ export default function SuperheroesList() {
         <Link to={`/superhero/${superhero.id}`} key={superhero.id}>
           <div>
             <h3>{superhero.nickname}</h3>
+            <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} className={'avatar'} />
           </div>
         </Link>
       ))}

@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import { httpRequest } from '../helpers/http.helper';
+import { Redirect } from 'react-router';
 
 export default function CreateSuperhero() {
-  const { request } = httpRequest();
-
   const [state, setState] = useState({
     nickname: '',
     real_name: '',
@@ -14,6 +11,7 @@ export default function CreateSuperhero() {
     catch_phrase: ''
   });
   const [images, setImages] = useState([]);
+  const [newSuperhero, setNewSuperhero] = useState();
 
   const changeInput = (e) => {
     const {target: { name, value }} = e;
@@ -23,7 +21,7 @@ export default function CreateSuperhero() {
     });
   };
 
-  const changeFileInput = async (e) => {
+  const changeFileInput = (e) => {
     setImages([...e.target.files]);
   };
 
@@ -34,15 +32,16 @@ export default function CreateSuperhero() {
     });
 
     Object.entries(state).map(([key, value]) => {
-      console.log('key = ', key, '; val = ', value);
       formData.append(key, value);
     });
 
-    await axios.post('http://localhost:5000/create', formData, {
+    const res = await axios.post('http://localhost:5000/create', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
+
+    setNewSuperhero(res.data);
 
     setState({
       nickname: '',
@@ -52,6 +51,10 @@ export default function CreateSuperhero() {
       catch_phrase: ''
     });
   };
+
+  useEffect(() => {
+    return () => false;
+  }, []);
 
   return (
     <div>
@@ -74,6 +77,10 @@ export default function CreateSuperhero() {
       <input multiple={true} onChange={changeFileInput} type={'file'} name={'image'} />
       <br />
       <button onClick={addNewHero}>add new hero</button>
+
+      {newSuperhero && (
+        <Redirect to={`/superhero/${newSuperhero.id}`} />
+      )}
     </div>
   )
 };
