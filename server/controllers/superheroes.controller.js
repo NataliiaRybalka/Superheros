@@ -73,7 +73,15 @@ module.exports = {
         photos,
       } = req;
 
-      const allPhotosPathArray = [];
+      const superhero = await Superhero.findOne({
+        attributes: ['images']
+      }, {
+        where: {
+          id
+        }
+      });
+
+      const allPhotosPathArray = [...superhero.images];
       if (photos) {
         for (const photo of photos) {
           const { finalPath, photoPath } = await createPhotoPath(photo.name, id);
