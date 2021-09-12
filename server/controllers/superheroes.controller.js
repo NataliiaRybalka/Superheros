@@ -36,5 +36,21 @@ module.exports = {
     } catch (e) {
       next(e);
     }
+  },
+
+  deleteSuperhero: async (req, res, next) => {
+    try {
+      const Superhero = db.getModel('Superhero');
+      
+      const a = await Superhero.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
+
+      res.json('DELETED');
+    } catch (e) {
+      next(e);
+    }
   }
 };

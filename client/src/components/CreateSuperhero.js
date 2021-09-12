@@ -31,9 +31,7 @@ export default function CreateSuperhero() {
       formData.append(image.name, image);
     });
 
-    Object.entries(state).map(([key, value]) => {
-      formData.append(key, value);
-    });
+    Object.entries(state).map(([key, value]) => formData.append(key, value));
 
     const res = await axios.post('http://localhost:5000/create', formData, {
       headers: {
@@ -78,9 +76,7 @@ export default function CreateSuperhero() {
       <br />
       <button onClick={addNewHero}>add new hero</button>
 
-      {newSuperhero && (
-        <Redirect to={`/superhero/${newSuperhero.id}`} />
-      )}
+      { newSuperhero && <Redirect to={`/superhero/${newSuperhero.id}`} /> }
     </div>
   )
 };
