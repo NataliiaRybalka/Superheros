@@ -1,0 +1,25 @@
+.form {
+  margin: 50px 200px;
+  border: 1px solid #009900;
+  width: 500px;
+}
+
+label {
+  margin: 0 30px 0 50px;
+}
+.labelTextarea {
+  line-height: 50px;
+}
+input {
+  margin: 20px 0;
+}
+
+.form > button {
+  margin: 20px 50px;
+  font-size: 30px;
+  background-color: #009900;
+  border: none;
+  cursor: pointer;
+  color: #ccffcc;
+  font-weight: bold;
+}
