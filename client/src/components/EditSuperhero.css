@@ -1,0 +1,25 @@
+.editForm {
+  width: 700px;
+}
+.editImages {
+  border: 1px solid #009900;
+  margin: 10px;
+  padding: 10px;
+}
+.editImages > label {
+  margin: 0 10px;
+}
+.editImages > span > label {
+  margin: 0;
+}
+.editImages > span > input {
+  margin-left: 20px;
+  margin-right: -20px;
+}
+.editImage {
+  height: 150px;
+  margin-left: 20px;
+}
+.selected {
+  height: 200px;
+}

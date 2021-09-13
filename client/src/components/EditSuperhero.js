@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './EditSuperhero.css';
 
 export default function EditSuperhero(props) {
   const { state, setState, setStartEdit, superhero, setSuperhero } = props;
   const [images, setImages] = useState([]);
+  const [selected, setSelected] = useState(false);
 
   const changeInput = (e) => {
     const {target: { name, value }} = e;
@@ -25,6 +27,7 @@ export default function EditSuperhero(props) {
 
   const selectAvatar = (image) => {
     setState({...state, avatar: image});
+    setSelected(!selected);
   };
 
   const updateHero = async () => {
@@ -53,44 +56,48 @@ export default function EditSuperhero(props) {
   };
 
   return (
-    <div>
-      <label>nickname</label>
+    <div className={'form editForm'}>
+      <label>Nickname</label>
       <input value={state.nickname} onChange={changeInput} type={'text'} name={'nickname'} />
       <br />
-      <label>real_name</label>
+      <label>Real Name</label>
       <input value={state.real_name} onChange={changeInput} type={'text'} name={'real_name'} />
       <br />
-      <label>origin_description</label>
-      <textarea value={state.origin_description} onChange={changeInput} name={'origin_description'} />
+      <label>Origin Description</label>
+      <textarea value={state.origin_description} onChange={changeInput} name={'origin_description'} rows={'5'} cols={'30'} />
       <br />
-      <label>superpowers</label>
+      <label>Superpowers</label>
       <input value={state.superpowers} onChange={changeInput} type={'text'} name={'superpowers'} />
       <br />
-      <label>catch_phrase</label>
+      <label>Catch Phrase</label>
       <input value={state.catch_phrase} onChange={changeInput} type={'text'} name={'catch_phrase'} />
       <br />
-      <label>images</label>
+      <label>Images</label>
       <input multiple={true} onChange={changeFileInput} type={'file'} name={'image'} />
       <br />
-      <label>avatar</label>
-      {superhero.images && superhero.images.map(image => <img
-        src={`http://localhost:5000/${image}`}
-        alt={superhero.nickname}
-        key={image}
-        onClick={() => selectAvatar(image)}
-      />)}
-      <br />
-      <label>delete image</label>
-      <br />
-      {superhero.images && superhero.images.map(image => (
-        <span key={image}>
-          <input value={image} type={'checkbox'} name={'deleteImages'} onChange={changeInput} /> <label>
-            <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} />
-          </label>
-          <br />
-        </span>
-      ))}
-      <br />
+      <div className={'editImages'}>
+        <label>avatar</label>
+        {superhero.images && superhero.images.map(image => <img
+          src={`http://localhost:5000/${image}`}
+          alt={superhero.nickname}
+          key={image}
+          onClick={() => selectAvatar(image)}
+          className={`editImage ${(state.avatar === image) ? 'selected' : ''}`}
+        />)}
+      </div>
+
+      <div className={'editImages'}>
+        <label>delete image</label>
+        {superhero.images && superhero.images.map(image => (
+          <span key={image}>
+            <input value={image} type={'checkbox'} name={'deleteImages'} onChange={changeInput} /> 
+            <label>
+              <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} className={'editImage'} />
+            </label>
+          </span>
+        ))}
+      </div>
+
       <button onClick={updateHero}>update superhero</button>
     </div>
   )

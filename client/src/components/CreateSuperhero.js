@@ -67,7 +67,7 @@ export default function CreateSuperhero() {
         <input value={state.real_name} onChange={changeInput} type={'text'} name={'real_name'} />
         <br />
         <label className={'labelTextarea'}>Origin Description</label>
-        <textarea value={state.origin_description} onChange={changeInput} name={'origin_description'} />
+        <textarea value={state.origin_description} onChange={changeInput} name={'origin_description'} rows={'5'} cols={'30'} />
         <br />
         <label>Superpowers</label>
         <input value={state.superpowers} onChange={changeInput} type={'text'} name={'superpowers'} />
