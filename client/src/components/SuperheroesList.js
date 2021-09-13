@@ -45,10 +45,12 @@ export default function SuperheroesList() {
         ))}
         <br />
       </div>
-        
-      {arrayForPages.map(page => (
-        <button onClick={() => setPage(page)} key={page}>{page}</button>
-      ))}
+      
+      <div className={'buttonsBlock'}>
+        {arrayForPages.map(page => (
+          <button onClick={() => setPage(page)} key={page}>{page}</button>
+        ))}
+      </div>
     </div>
   )
 };
