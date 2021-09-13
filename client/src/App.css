@@ -2,7 +2,7 @@
   margin: 0 50px;
 }
 
-header {
+#mainHeader {
   display: flex;
   justify-content: space-around;
 
@@ -11,7 +11,7 @@ header {
   padding-top: 20px;
   font-size: 20px;
 }
-header > a {
+#mainHeader > a {
   text-decoration: none;
   color: black;
 }

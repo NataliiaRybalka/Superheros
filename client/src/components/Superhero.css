@@ -1,0 +1,42 @@
+#heroHeader {
+  display: flex;
+}
+
+#titleBlock {
+  margin: 0 auto;
+}
+.catchphrase {
+  text-align: center;
+}
+
+#editDeleteBlock > button {
+  margin: 10px;
+  font-size: 17px;
+  background-color: #009900;
+  border: none;
+  cursor: pointer;
+  color: #ccffcc;
+  font-weight: bold;
+}
+
+#avatarPage {
+  height: 500px;
+  float: left;
+  margin-right: 100px;
+}
+.descriptionSection {
+  min-height: 500px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.imagesSection {
+  margin: 50px 0;
+  border: 2px solid #009900;
+  display: flex;
+  justify-content: center;
+}
+.imagesPage {
+  height: 400px;
+  padding: 20px;
+}

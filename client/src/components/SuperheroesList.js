@@ -39,7 +39,7 @@ export default function SuperheroesList() {
           <Link to={`/superhero/${superhero.id}`} key={superhero.id}>
             <div className={'heroCard'}>
               <h3>{superhero.nickname}</h3>
-              {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} className={'avatar'} />}
+              {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} className={'avatarList'} />}
             </div>
           </Link>
         ))}

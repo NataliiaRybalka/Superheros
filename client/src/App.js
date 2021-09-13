@@ -8,7 +8,7 @@ function App() {
   return (
     <div className={'App'}>
       <Router>
-        <header>
+        <header id={'mainHeader'}>
           <Link to={'/'}>Get All Superhero</Link>
           <Link to={'/create'}>Add new Superhero</Link>
         </header>

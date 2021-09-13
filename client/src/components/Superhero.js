@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+import './Superhero.css';
 
 import { httpRequest } from '../helpers/http.helper';
 import { EditSuperhero } from '.';
@@ -69,30 +70,41 @@ export default function Superhero() {
     <div>
       {startEdit && <EditSuperhero state={state} setState={setState} setStartEdit={setStartEdit} superhero={superhero} setSuperhero={setSuperhero} />}
 
-      {superhero && (
-        <div>
+      <div className={'superheroBlock'}>
+        {superhero && (
           <div>
-            <div>
-            <h1>{superhero.nickname} - {superhero.real_name}</h1>
-            <h3>{superhero.catch_phrase}</h3>
-            </div>
+            <header id={'heroHeader'}>
+              <div id={'titleBlock'}>
+                <h1>{superhero.nickname} - {superhero.real_name}</h1>
+                <h3 className={'catchphrase'}>{superhero.catch_phrase}</h3>
+              </div>
 
-            <div>
-              <button onClick={editSuperhero}>edit</button>
-              <button onClick={deleteSuperhero}>delete</button>
-            </div>
+              <div id={'editDeleteBlock'}>
+                <button onClick={editSuperhero}>edit</button>
+                <button onClick={deleteSuperhero}>delete</button>
+              </div>
+            </header>
+
+            <main>
+              {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} id={'avatarPage'} />}
+
+              <section className={'descriptionSection'}>
+                <p>{superhero.origin_description}</p>
+                <h3>{superhero.nickname} has such superpowers:</h3>
+                <ul>
+                  {superpowers && superpowers.map(power => <li key={power}>{power}</li>)}
+                </ul>
+              </section>
+
+              <section className={'imagesSection'}>
+                {superhero.images && superhero.images.map(image => (
+                  <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} key={image} className={'imagesPage'} />
+                ))}
+              </section>
+            </main>
           </div>
-          {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} />}
-          <p>{superhero.origin_description}</p>
-          <h3>{superhero.nickname} has such superpowers:</h3>
-          <ul>
-            {superpowers && superpowers.map(power => <li key={power}>{power}</li>)}
-          </ul>
-          {superhero.images && superhero.images.map(image => (
-            <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} key={image} />
-          ))}
-        </div>
-      )}
+        )}
+      </div>
 
       {isDeleted && <Redirect to={'/'} />}
     </div>
