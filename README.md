@@ -18,14 +18,14 @@ Project is created with:
 ## Setup
 To run this project
 1) Install node dependencies using npm:
-```
-$ cd ../server
+```bash
+$ cd server/
 $ npm install
 $ node app.js
 ```
 2) Install react dependencies using npm:
-```
-$ cd ../client
+```bash
+$ cd ../client/
 $ npm install
 $ npm start
 ```
