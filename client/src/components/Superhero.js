@@ -55,6 +55,7 @@ export default function Superhero() {
 
   const deleteSuperhero = async () => {
     const data = await request(`http://localhost:5000/${id}`, 'DELETE');
+
     if (data === 'DELETED') {
       setIsDeleted(true);
     }
@@ -81,13 +82,13 @@ export default function Superhero() {
               <button onClick={deleteSuperhero}>delete</button>
             </div>
           </div>
-          <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} />
+          {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} />}
           <p>{superhero.origin_description}</p>
           <h3>{superhero.nickname} has such superpowers:</h3>
           <ul>
             {superpowers && superpowers.map(power => <li key={power}>{power}</li>)}
           </ul>
-          {superhero.images.map(image => (
+          {superhero.images && superhero.images.map(image => (
             <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} key={image} />
           ))}
         </div>

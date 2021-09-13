@@ -6,11 +6,12 @@ import { CreateSuperhero, Superhero, SuperheroesList } from './components';
 
 function App() {
   return (
-    <div>
+    <div className={'App'}>
       <Router>
-        <Link to={'/'}>Get All Superhero</Link>
-        <br />
-        <Link to={'/create'}>Add new Superhero</Link>
+        <header>
+          <Link to={'/'}>Get All Superhero</Link>
+          <Link to={'/create'}>Add new Superhero</Link>
+        </header>
 
         <Switch>
           <Route path={'/create'}> <CreateSuperhero /> </Route>

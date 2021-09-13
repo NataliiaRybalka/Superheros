@@ -50,7 +50,8 @@ module.exports = {
         }
       });
 
-      res.status(responseCodes.NO_CONTENT).json('DELETED');
+      res.json('DELETED');
+      res.json('DELETED');
     } catch (e) {
       next(e);
     }

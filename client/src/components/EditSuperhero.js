@@ -73,7 +73,7 @@ export default function EditSuperhero(props) {
       <input multiple={true} onChange={changeFileInput} type={'file'} name={'image'} />
       <br />
       <label>avatar</label>
-      {superhero.images.map(image => <img
+      {superhero.images && superhero.images.map(image => <img
         src={`http://localhost:5000/${image}`}
         alt={superhero.nickname}
         key={image}
@@ -82,7 +82,7 @@ export default function EditSuperhero(props) {
       <br />
       <label>delete image</label>
       <br />
-      {superhero.images.map(image => (
+      {superhero.images && superhero.images.map(image => (
         <span key={image}>
           <input value={image} type={'checkbox'} name={'deleteImages'} onChange={changeInput} /> <label>
             <img src={`http://localhost:5000/${image}`} alt={superhero.nickname} />

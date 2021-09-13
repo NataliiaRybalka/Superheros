@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './SuperheroesList.css';
 
 import { httpRequest } from '../helpers/http.helper';
 
@@ -33,16 +34,18 @@ export default function SuperheroesList() {
     <div>
       <h1>Superheroes</h1>
 
-      {allSuperheroes && allSuperheroes.map(superhero => (
-        <Link to={`/superhero/${superhero.id}`} key={superhero.id}>
-          <div>
-            <h3>{superhero.nickname}</h3>
-            <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} />
-          </div>
-        </Link>
-      ))}
-      <br />
-
+      <div className={'heroCardsBlock'}>
+        {allSuperheroes && allSuperheroes.map(superhero => (
+          <Link to={`/superhero/${superhero.id}`} key={superhero.id}>
+            <div className={'heroCard'}>
+              <h3>{superhero.nickname}</h3>
+              {superhero.avatar && <img src={`http://localhost:5000/${superhero.avatar}`} alt={superhero.nickname} className={'avatar'} />}
+            </div>
+          </Link>
+        ))}
+        <br />
+      </div>
+        
       {arrayForPages.map(page => (
         <button onClick={() => setPage(page)} key={page}>{page}</button>
       ))}
