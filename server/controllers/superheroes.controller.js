@@ -76,15 +76,16 @@ module.exports = {
         photos,
       } = req;
 
-      const superhero = await Superhero.findOne({
-        attributes: ['images']
-      }, {
+      const superhero = await Superhero.findAll({
         where: {
           id
-        }
+      },
+      attributes: {
+        include: ['images']
+      }
       });
 
-      const allPhotosPathArray = [...superhero.images];
+      const allPhotosPathArray = [...superhero[0].dataValues.images];
 
       if (photos) {
         for (const photo of photos) {
