@@ -1,6 +1,9 @@
 {
   "name": "superhero",
   "version": "1.0.0",
+  "scripts": {
+    "migrate": "npx sequelize-cli db:migrate"
+  },
   "dependencies": {
     "cors": "2.8.5",
     "dotenv": "10.0.0",

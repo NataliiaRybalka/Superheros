@@ -11,6 +11,7 @@ module.exports = (client) => {
       },
       nickname: {
         type: DataTypes.STRING,
+        required: true
       },
       real_name: {
         type: DataTypes.STRING,
@@ -32,7 +33,7 @@ module.exports = (client) => {
       }
     },
     {
-      tableName: 'superheroes_list',
+      tableName: 'superheroes',
       timestamps: false
     }
   );

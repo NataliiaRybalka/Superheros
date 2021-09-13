@@ -21,6 +21,7 @@ To run this project
 ```bash
 $ cd server/
 $ npm install
+$ npm run migrate
 $ node app.js
 ```
 2) Install react dependencies using npm:
